@@ -29,15 +29,26 @@ exports.initialize = function(pathsObj) {
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function() {
+  // Parse list of urls from sites.txt
+  // Located at paths.list
 };
 
 exports.isUrlInList = function() {
+  // Call readListOfUrls
+  // Look for index of passed in site
+  // If find
+    // Call isUrlArchived
+  // Else call addUrlToList
+    // Respond with loading.html
 };
 
 exports.addUrlToList = function() {
+  // Add url to sites.txt and put write file back to sites.txt
 };
 
 exports.isUrlArchived = function() {
+  // Check if archived
+    // If archived then respond with archived version
 };
 
 exports.downloadUrls = function() {

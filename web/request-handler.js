@@ -11,6 +11,7 @@ exports.handleRequest = function (req, res) {
   var parsed = url.parse(req.url, true, true);
   // Grab path
   var filepath = parsed.pathname;
+  console.log(filepath);
   // Direct path to appropriate key in paths object
   // If path is empty then we respond with index.html
   if (filepath === '/') {
@@ -24,6 +25,8 @@ exports.handleRequest = function (req, res) {
     filepath = archive.paths.styles;
     res.writeHead(200, {'Content-Type': 'text/css'});
   }
+
+  
 
   // Serve asseets with helper function
   helpers.serveAssets(res, filepath);
