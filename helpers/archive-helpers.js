@@ -9,7 +9,10 @@ var _ = require('underscore');
  * customize it in any way you wish.
  */
 
+// Paths object below will be used to pull stuff with request-handler.js
 exports.paths = {
+  index: path.join(__dirname, '../web/public/index.html'),
+  styles: path.join(__dirname, '../web/public/styles.css'),
   siteAssets: path.join(__dirname, '../web/public'),
   archivedSites: path.join(__dirname, '../archives/sites'),
   list: path.join(__dirname, '../archives/sites.txt')
