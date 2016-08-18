@@ -73,7 +73,6 @@ exports.downloadUrls = function(arrayOfUrls) {
             chunky += chunk.toString();
           });
           res.on('end', function() {
-            console.log(chunky);
             fs.writeFile(exports.paths.archivedSites + '/' + item, chunky, 'utf-8', (err) => {
               if (err) {
                 throw err;
