@@ -15,11 +15,12 @@
     "test": "mocha test",
     "test:es6": "mocha --compilers js:babel-register test",
     "lint": "eslint ./",
-    "fetch": "node ./workers/propFetch.js"
+    "fetch": "node ./workers/htmlfetcher.js"
   },
   "dependencies": {
     "bluebird": "^3.3.4",
     "cron": "^1.1.0",
+    "node-cron": "^1.1.1",
     "request": "^2.70.0",
     "underscore": "^1.8.3"
   },
