@@ -54,10 +54,12 @@ describe('server', function() {
 
     describe('POST', function () {
       it('should append submitted sites to \'sites.txt\'', function(done) {
-        var url = 'www.example.com';
+        var url = 'www.example1.com';
 
         // Reset the test file and process request
         fs.closeSync(fs.openSync(archive.paths.list, 'w'));
+
+        archive.addUrlToList('www.example1.com');
 
         request
           .post('/')

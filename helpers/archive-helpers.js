@@ -28,28 +28,39 @@ exports.initialize = function(pathsObj) {
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
-exports.readListOfUrls = function() {
-  // Parse list of urls from sites.txt
-  // Located at paths.list
+exports.readListOfUrls = function(callback) {
+  fs.readFile(exports.paths.list, 'utf8', (err, data) => {
+    var dataArray = data.split('\n');
+    callback(dataArray);
+  });
 };
 
-exports.isUrlInList = function() {
-  // Call readListOfUrls
-  // Look for index of passed in site
-  // If find
-    // Call isUrlArchived
-  // Else call addUrlToList
-    // Respond with loading.html
+exports.isUrlInList = function(target, callback) {
+  exports.readListOfUrls(function(data) {
+    callback(data.indexOf(target) !== -1);
+  });
 };
 
-exports.addUrlToList = function() {
-  // Add url to sites.txt and put write file back to sites.txt
+exports.addUrlToList = function(item, callback) {
+  fs.appendFile(exports.paths.list, item + '\n', callback);
 };
 
-exports.isUrlArchived = function() {
-  // Check if archived
-    // If archived then respond with archived version
+exports.isUrlArchived = function(target, callback) {
+  fs.readdir(exports.paths.archivedSites, (err, files) => (
+   callback(files.indexOf(target) !== -1) 
+  ));
 };
 
-exports.downloadUrls = function() {
+exports.downloadUrls = function(arrayOfUrls) {
+  arrayOfUrls.forEach((item) => {
+    exports.isUrlArchived(item, function(exists) {
+      if (!exists) {
+        fs.writeFile(exports.paths.archivedSites + '/' + item, item, (err) => {
+          if (err) {
+            throw err;
+          }
+        });
+      }
+    });
+  });
 };
