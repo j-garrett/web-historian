@@ -5,12 +5,10 @@ var helpers = require('./http-helpers');
 var url = require('url');
 var fs = require('fs');
 
+// Build parameters to feed helpers.serveAssets
 exports.handleRequest = function (req, res) {
-  // Build parameters to feed helpers.serveAssets
   // Parse url
   var urlPath = path.parse(req.url);
-  // Grab path
-  // console.log(urlPath);
   // Direct path to appropriate key in paths object
   // If path is empty then we respond with index.html
   if (req.method === 'GET') {
@@ -38,12 +36,11 @@ exports.handleRequest = function (req, res) {
   if (req.method === 'POST') {
     res.writeHead(201);
     req.on('data', function(chunk) {
-      // res.write(chunk);
       var newUrl = chunk.toString().substring(4);
       archive.isUrlInList(newUrl, function(exists) {
         if (!exists) {
           archive.addUrlToList(newUrl, function() {
-            res.end();
+            helpers.serveAssets(res, archive.paths.loading);
           });
         } else {
           urlPath = archive.paths.archivedSites + '/' + newUrl;
@@ -52,12 +49,6 @@ exports.handleRequest = function (req, res) {
         }
       });
     });
-
-    // req.on('end', function() {
-
-    // });
   }
 
-
-  // Serve asseets with helper function
 };
