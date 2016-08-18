@@ -1,7 +1,8 @@
 var http = require('http');
 var handler = require('./request-handler');
 var initialize = require('./initialize.js');
-
+var cron = require('node-cron');
+var fetcher = require('../workers/htmlfetcher').fetcher;
 // Why do you think we have this here?
 // HINT: It has to do with what's in .gitignore
 initialize('./archives');
@@ -17,3 +18,7 @@ if (module.parent) {
   console.log('Listening on http://' + ip + ':' + port);
 }
 
+cron.schedule('* * * * *', function() {
+  console.log('cron called at: ', Date.now());
+  fetcher();
+});

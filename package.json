@@ -30,6 +30,7 @@
     "chai": "^3.5.0",
     "eslint-config-hackreactor": "git://github.com/hackreactor-labs/eslint-config-hackreactor",
     "mocha": "^2.4.5",
+    "node-cron": "^1.1.1",
     "supertest": "^1.2.0"
   },
   "babel": {
